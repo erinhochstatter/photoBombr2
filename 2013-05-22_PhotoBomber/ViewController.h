@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>
-@property (strong, nonatomic) IBOutlet UIImageView *testImageView;
+@interface ViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UICollectionView *galleryView;
-@property (strong, nonatomic) IBOutlet UIImageView *galleryItemImageView;
 
 @end

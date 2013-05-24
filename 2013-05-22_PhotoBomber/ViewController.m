@@ -7,15 +7,22 @@
 //
 
 #import "ViewController.h"
+#import "MediaCell.h"
 
 @interface ViewController ()
 {
     NSDictionary *searchDictionary;
     NSArray *dataArray;
+    
 }
 @end
 
 @implementation ViewController
+
+
+NSString *kCellID= @"mediaCellID";
+// UICollectionViewCell storyboard identifier, i used this instead of the string that normally goes in the cell creation part of things.
+
 
 - (void)viewDidLoad
 {
@@ -44,7 +51,9 @@
                            completionHandler:^(NSURLResponse *urlResponse, NSData *data, NSError *error){
                                
                                searchDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                                              
+                               dataArray = [searchDictionary objectForKey:@"data"];
+                               NSDictionary *metaDict = [searchDictionary objectForKey:@"meta"];
+                               NSLog (@"error %@",[metaDict objectForKey:@"error_message"]);
                                //[activityViewer stopAnimating];
                                
                                [self.galleryView reloadData];
@@ -57,29 +66,23 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
+    NSLog(@"this logs the sections in view");
     return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
+    NSLog(@"this logs the items in section:%d", dataArray.count);
     return dataArray.count;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *identifier = @"mediaCell";
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    MediaCell *mediaCell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
     
-    if (cell == nil) {
-        cell = [[UICollectionViewCell alloc] init];
-        
-    }
-    
-    dataArray = [searchDictionary objectForKey:@"data"];
-    NSDictionary *metaDict = [searchDictionary objectForKey:@"meta"];
-    NSLog (@"error %@",[metaDict objectForKey:@"error_message"]);
+    //the documentation says that if you dequeue, the cell will never be nil, so i removed the if cell = nil part. 
     
     NSDictionary *dataDictionary =[dataArray objectAtIndex:indexPath.item];
     NSDictionary *imageDictionary = [dataDictionary objectForKey: @"images"];
@@ -89,8 +92,8 @@
     NSDictionary *imgThumbDictionary = [imageDictionary objectForKey:@"thumbnail"];
     
     
-    NSDictionary *captionDictionary =[dataDictionary objectForKey:@"caption"];
-    NSLog(@"caption %@",[captionDictionary objectForKey:@"caption"]);
+    //NSDictionary *captionDictionary =[dataDictionary objectForKey:@"caption"];
+    //NSLog(@"caption %@",[captionDictionary objectForKey:@"caption"]);
     
     
     /*NSURL *imageURL = [NSURL URLWithString:[imgStdResDictionary objectForKey:@"url"]];
@@ -101,10 +104,9 @@
     NSData *thumbData = [NSData dataWithContentsOfURL:thumbURL];
     UIImage *selectedThumbnail = [UIImage imageWithData:thumbData];
     
-    self.galleryItemImageView = (UIImageView *)[cell viewWithTag:95];
-    self.galleryItemImageView.image= selectedThumbnail;
+    mediaCell.thumbnailImageView.image= selectedThumbnail;
     
-    return cell;
+    return mediaCell;
 }
 
 
