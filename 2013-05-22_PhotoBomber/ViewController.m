@@ -8,12 +8,18 @@
 
 #import "ViewController.h"
 #import "MediaCell.h"
+#import "ImageReviewViewController.h"
 
 @interface ViewController ()
 {
     NSDictionary *searchDictionary;
     NSArray *dataArray;
-    
+    NSDictionary *dataDictionary;
+    MediaCell *mediaCell;
+    BOOL shareEnabled;
+    NSMutableArray *selectedRecipes;
+    //NSDictionary *mainSegueDictionary;
+
 }
 @end
 
@@ -80,11 +86,11 @@ NSString *kCellID= @"mediaCellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    MediaCell *mediaCell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
+    mediaCell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
     
     //the documentation says that if you dequeue, the cell will never be nil, so i removed the if cell = nil part. 
     
-    NSDictionary *dataDictionary =[dataArray objectAtIndex:indexPath.item];
+    dataDictionary =[dataArray objectAtIndex:indexPath.item];
     NSDictionary *imageDictionary = [dataDictionary objectForKey: @"images"];
     
     NSDictionary *imgStdResDictionary = [imageDictionary objectForKey:@"standard_resolution"];
@@ -94,11 +100,6 @@ NSString *kCellID= @"mediaCellID";
     
     //NSDictionary *captionDictionary =[dataDictionary objectForKey:@"caption"];
     //NSLog(@"caption %@",[captionDictionary objectForKey:@"caption"]);
-    
-    
-    /*NSURL *imageURL = [NSURL URLWithString:[imgStdResDictionary objectForKey:@"url"]];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    UIImage *selectedImage = [UIImage imageWithData:imageData];*/
     
     NSURL *thumbURL = [NSURL URLWithString:[imgThumbDictionary objectForKey:@"url"]];
     NSData *thumbData = [NSData dataWithContentsOfURL:thumbURL];
@@ -110,6 +111,44 @@ NSString *kCellID= @"mediaCellID";
 }
 
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"segueToImageReview"])
+    {
+        NSIndexPath *selectedIndexPath = [[self.galleryView indexPathsForSelectedItems] objectAtIndex:0];
+        
+        // load the image, to prevent it from being cached we use 'initWithContentsOfFile'
+        NSDictionary *selectedIndexDict = [dataArray objectAtIndex:selectedIndexPath.row];
+        NSDictionary *imageDictionary = [selectedIndexDict objectForKey: @"images"];
+        NSDictionary *imgStdResDictionary = [imageDictionary objectForKey:@"standard_resolution"];
+        NSURL *imageURL = [NSURL URLWithString:[imgStdResDictionary objectForKey:@"url"]];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            
+        ImageReviewViewController *imageReviewViewController = [segue destinationViewController];
+        imageReviewViewController.reviewImageData = imageData;
+        //imageReviewViewController.reviewImageView.image= selectedImage;
+        NSLog(@" selected image path: %@", imageURL);
+    }
+    //[self.galleryView deselectItemAtIndexPath:indexPath animated:YES];
+}
+
+/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+        NSArray *indexPathsSelected = [self.galleryView indexPathsForSelectedItems];
+        NSIndexPath *indexPath = [indexPathsSelected objectAtIndex:0];
+
+    
+    //I think what happened is that it's making an array of the object in the selected array, which is maybe a cell or an image.  the dictionary may need to be a property of that cell to go over.
+    
+    ((ImageReviewViewController*)(segue.destinationViewController)).selectedImageDict=mainSegueDictionary;
+    
+    [self.galleryView deselectItemAtIndexPath:indexPath animated:YES];
+    
+}*/
 
 
+- (IBAction)refreshWithButton:(id)sender {
+    [self searchMediaByLocation];
+    [self.galleryView reloadData];
+}
 @end

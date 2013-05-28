@@ -20,6 +20,7 @@
 		A406D57C174D5E860003F74B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A406D57B174D5E860003F74B /* ViewController.m */; };
 		A406D584174DAD2B0003F74B /* MediaImages.m in Sources */ = {isa = PBXBuildFile; fileRef = A406D583174DAD2B0003F74B /* MediaImages.m */; };
 		A406D649174FBB5A0003F74B /* MediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A406D648174FBB5A0003F74B /* MediaCell.m */; };
+		A406D64F175182EE0003F74B /* ImageReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A406D64E175182EE0003F74B /* ImageReviewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		A406D583174DAD2B0003F74B /* MediaImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaImages.m; sourceTree = "<group>"; };
 		A406D647174FBB5A0003F74B /* MediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaCell.h; sourceTree = "<group>"; };
 		A406D648174FBB5A0003F74B /* MediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaCell.m; sourceTree = "<group>"; };
+		A406D64D175182EE0003F74B /* ImageReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageReviewViewController.h; sourceTree = "<group>"; };
+		A406D64E175182EE0003F74B /* ImageReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageReviewViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,8 @@
 				A406D583174DAD2B0003F74B /* MediaImages.m */,
 				A406D647174FBB5A0003F74B /* MediaCell.h */,
 				A406D648174FBB5A0003F74B /* MediaCell.m */,
+				A406D64D175182EE0003F74B /* ImageReviewViewController.h */,
+				A406D64E175182EE0003F74B /* ImageReviewViewController.m */,
 				A406D577174D5E860003F74B /* MainStoryboard.storyboard */,
 				A406D566174D5E860003F74B /* Supporting Files */,
 			);
@@ -188,6 +193,7 @@
 				A406D57C174D5E860003F74B /* ViewController.m in Sources */,
 				A406D584174DAD2B0003F74B /* MediaImages.m in Sources */,
 				A406D649174FBB5A0003F74B /* MediaCell.m in Sources */,
+				A406D64F175182EE0003F74B /* ImageReviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

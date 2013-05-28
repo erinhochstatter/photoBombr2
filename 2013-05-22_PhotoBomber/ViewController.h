@@ -12,4 +12,5 @@
 @interface ViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UICollectionView *galleryView;
 
+- (IBAction)refreshWithButton:(id)sender;
 @end

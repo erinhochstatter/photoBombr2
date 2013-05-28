@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="upB-xh-blQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="F7G-ud-E4M">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -9,12 +9,12 @@
             <objects>
                 <viewController id="upB-xh-blQ" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sR4-Dp-XE9">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yqP-18-Ono">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="498" id="sE7-Fc-vl0"/>
+                                    <constraint firstAttribute="height" constant="491" id="AhJ-1f-683"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I9H-Dn-Vfp">
                                     <size key="itemSize" width="95" height="95"/>
@@ -45,6 +45,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="thumbnailImageView" destination="6U7-QE-F6c" id="yKk-rb-agh"/>
+                                            <segue destination="4Hn-YL-NIs" kind="push" identifier="segueToImageReview" id="r8F-PO-6oc"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -55,6 +56,7 @@
                             </collectionView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="eventually we could put tools/nav here." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzG-T5-8Ku">
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="mrk-9L-mEi"/>
                                     <constraint firstAttribute="height" constant="48" id="vnl-fS-6e7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -64,24 +66,82 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xzG-T5-8Ku" firstAttribute="top" secondItem="sR4-Dp-XE9" secondAttribute="top" type="default" id="1If-Oi-Le2"/>
-                            <constraint firstItem="yqP-18-Ono" firstAttribute="bottom" secondItem="sR4-Dp-XE9" secondAttribute="bottom" type="default" id="AIQ-3k-jXG"/>
-                            <constraint firstItem="xzG-T5-8Ku" firstAttribute="trailing" secondItem="sR4-Dp-XE9" secondAttribute="trailing" type="default" id="KGR-dK-bmL"/>
+                            <constraint firstItem="xzG-T5-8Ku" firstAttribute="top" secondItem="sR4-Dp-XE9" secondAttribute="top" type="default" id="2SM-nT-xFx"/>
                             <constraint firstItem="yqP-18-Ono" firstAttribute="trailing" secondItem="sR4-Dp-XE9" secondAttribute="trailing" type="default" id="b9Z-Jq-Lxj"/>
                             <constraint firstItem="yqP-18-Ono" firstAttribute="leading" secondItem="sR4-Dp-XE9" secondAttribute="leading" type="default" id="lIJ-oz-13a"/>
-                            <constraint firstItem="xzG-T5-8Ku" firstAttribute="leading" secondItem="sR4-Dp-XE9" secondAttribute="leading" type="default" id="pb4-8W-A7c"/>
+                            <constraint firstItem="xzG-T5-8Ku" firstAttribute="leading" secondItem="sR4-Dp-XE9" secondAttribute="leading" constant="10" id="pwr-Xj-DPp"/>
+                            <constraint firstItem="yqP-18-Ono" firstAttribute="top" secondItem="xzG-T5-8Ku" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zed-74-zVQ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ZZf-Ai-UVv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="f5e-YV-Zdt">
+                            <connections>
+                                <action selector="refreshWithButton:" destination="upB-xh-blQ" id="AcI-oT-g2A"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="galleryView" destination="yqP-18-Ono" id="coO-Om-6CS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phq-3q-ZhT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="-215"/>
+            <point key="canvasLocation" x="-11" y="-265"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eNj-wa-bA6">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="F7G-ud-E4M" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GAb-8b-AHJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="upB-xh-blQ" kind="relationship" relationship="rootViewController" id="amu-Qu-RYu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qZV-FC-7Ta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-521" y="-271"/>
+        </scene>
+        <!--Image Review View Controller-->
+        <scene sceneID="ugZ-qb-jeC">
+            <objects>
+                <viewController id="4Hn-YL-NIs" customClass="ImageReviewViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G8J-52-vym">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-6i-gh4">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="306" id="3W0-Pl-Z5k"/>
+                                    <constraint firstAttribute="height" constant="306" id="aHy-gD-Wqc"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JkM-6i-gh4" firstAttribute="centerX" secondItem="G8J-52-vym" secondAttribute="centerX" type="default" id="ErQ-pk-BCj"/>
+                            <constraint firstItem="JkM-6i-gh4" firstAttribute="top" secondItem="G8J-52-vym" secondAttribute="top" constant="64" id="tnJ-rY-de5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3AH-ck-igr"/>
+                    <connections>
+                        <outlet property="reviewImageView" destination="JkM-6i-gh4" id="pyJ-gJ-Dph"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T6o-PM-Elb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="441" y="-265"/>
         </scene>
     </scenes>
     <classes>
+        <class className="ImageReviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageReviewViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneWithButton:"/>
+                <relationship kind="outlet" name="reviewImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
         <class className="MediaCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MediaCell.h"/>
             <relationships>
@@ -106,6 +166,7 @@
         <class className="ViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
+                <relationship kind="action" name="refreshWithButton:"/>
                 <relationship kind="outlet" name="galleryView" candidateClass="UICollectionView"/>
             </relationships>
         </class>
